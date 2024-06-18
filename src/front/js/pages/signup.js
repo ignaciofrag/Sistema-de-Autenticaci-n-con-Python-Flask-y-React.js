@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
@@ -17,17 +18,26 @@ const Signup = () => {
             });
 
             if (response.ok) {
-                navigate('/login');
+                // Mostrar SweetAlert de éxito
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Registro exitoso',
+                    text: 'Usuario registrado correctamente',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    navigate('/login');
+                });
             } else if (response.status === 409) {
-                alert('User already exists');
+                alert('Usuario ya existe');
             } else {
                 const data = await response.json();
                 console.error(data.message);
             }
         } catch (error) {
-            console.error('Error during fetch:', error);
+            console.error('Error durante la solicitud:', error);
         }
     };
+
 
     return (
         <Container className="d-flex justify-content-center align-items-center min-vh-100" style={{ backgroundColor: 'black' }}>

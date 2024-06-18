@@ -1,4 +1,4 @@
-#!/workspaces/Sistema-de-Autenticaci-n-con-Python-Flask-y-React.js/venv/bin/python3
+#!/Users/ignaciogarfias/Documents/PROYECTOS-VISUAL/Sistema-de-Autenticaci-n-con-Python-Flask-y-React.js/venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys

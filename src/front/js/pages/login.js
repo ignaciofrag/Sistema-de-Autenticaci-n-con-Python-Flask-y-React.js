@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -19,15 +20,23 @@ const Login = () => {
             if (response.ok) {
                 const data = await response.json();
                 sessionStorage.setItem('token', data.token);
-                navigate('/private');
+                // Mostrar SweetAlert de éxito
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Inicio de sesión exitoso',
+                    text: '¡Bienvenido!',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    navigate('/private');
+                });
             } else {
                 const data = await response.json();
                 console.error(data.message);
                 alert(data.message);  
             }
         } catch (error) {
-            console.error('Error during fetch:', error);
-            alert('Error during fetch');
+            console.error('Error durante la solicitud:', error);
+            alert('Error durante la solicitud');
         }
     };
 
